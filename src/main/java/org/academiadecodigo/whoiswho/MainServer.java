@@ -4,10 +4,7 @@ import org.academiadecodigo.whoiswho.server.Server;
 
 import java.io.IOException;
 
-/**
- * Created by codecadet on 07/07/16.
- */
-public class Main {
+public class MainServer {
 
     public static void main(String[] args) {
         try {
