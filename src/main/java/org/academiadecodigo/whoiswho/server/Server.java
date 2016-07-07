@@ -13,34 +13,25 @@ import java.net.Socket;
 public class Server {
     private ServerSocket serverSocket;
     private ClientManager clientManager;
-    private Game game;
 
 
     public Server(int portNumber, int maxNumber) throws IOException {
         serverSocket = new ServerSocket(portNumber);
-        clientManager = new ClientManager(maxNumber);
+        clientManager = new ClientManager(maxNumber, this);
         new Thread(clientManager).start();
-        game = new Game();
-//        new Thread(game).start();
 
     }
 
-    public void host(){
+    public void host() {
 
+        while (true) {
 
-        while (true){
-
-            try{
+            try {
                 System.out.println("----Waiting for Connection----");
 
                 MySpecialPThread temp = new MySpecialPThread(serverSocket.accept());
 
-                if(clientManager.isFull()){
-                    clientManager.addToQueue(temp);
-
-                }else {
-                    clientManager.addToActive(temp);
-                }
+                clientManager.addToQueue(temp);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -51,28 +42,27 @@ public class Server {
     }
 
 
-    private void sendAll(String line){
+    public void sendToAll(String line, Game game) {
 
-        synchronized ( clientManager.getActiveList()){
+        synchronized (clientManager.getGame(game)) {
 
-            for (Runnable e: clientManager.getActiveList()) {
-
-                if(e instanceof MySpecialPThread){
+            for (Runnable e : clientManager.getGame(game)) {
+                if (e instanceof MySpecialPThread) {
                     ((MySpecialPThread) e).send(line);
                 }
 
             }
-
+            clientManager.getGame(game).notify();
         }
     }
 
 
-
-    public class MySpecialPThread implements Runnable{
+    public class MySpecialPThread implements Runnable {
 
         private final Socket clientSocket;
         private final BufferedReader in;
         private final PrintWriter out;
+        private Game game;
 
 
         private MySpecialPThread(Socket clientSocket) throws IOException {
@@ -81,22 +71,26 @@ public class Server {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-
         }
 
         @Override
         public void run() {
 
-            try{
+            try {
 
-                while (!clientSocket.isClosed()){
+                while (!clientSocket.isClosed()) {
                     String line = "";
 
-                    if((line = in.readLine()) != null){
-                        sendAll(Thread.currentThread().getName() + ": " + line);
+                    if ((line = in.readLine()) != null) {
+                        sendToAll(Thread.currentThread().getName() + ": " + line, game);
+                        game.checkAnswer(line);
 
                         // TODO: 07/07/16 calls to game
-                        // TODO: 07/07/16 exit condition (game)
+                        if (game.isGameOver()) {
+                            clientSocket.close();//// TODO: 07/07/16 close all active players
+                            clientManager.removeGame(game);
+                        }
+
                     }
 
                 }
@@ -108,7 +102,11 @@ public class Server {
 
         }
 
-        public void send(String toSend){
+        public void setGame(Game game){
+            this.game = game;
+        }
+
+        public void send(String toSend) {
             out.write(toSend);
             out.println();
         }
