@@ -1,5 +1,7 @@
 package org.academiadecodigo.whoiswho.client;
 
+import org.academiadecodigo.whoiswho.client.controllers.GameScreenController;
+
 /**
  * Created by dmaia on 07-07-2016.
  */
@@ -12,6 +14,13 @@ public class DataManager {
 
     private Character selected;
     private Character[] characters;
+
+    private GameScreenController observer;
+    private Client client;
+
+    public DataManager() {
+
+    }
 
     public String getUsername() {
         return username;
@@ -59,5 +68,17 @@ public class DataManager {
 
     public void setCharacters(Character[] characters) {
         this.characters = characters;
+    }
+
+    public void notifyPlayer(String opponentAnswer){
+        observer.update(opponentAnswer);
+    }
+
+    public void setObserver(GameScreenController observer) {
+        this.observer = observer;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

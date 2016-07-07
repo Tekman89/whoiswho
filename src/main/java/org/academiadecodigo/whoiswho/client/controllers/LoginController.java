@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import org.academiadecodigo.whoiswho.client.Client;
 import org.academiadecodigo.whoiswho.client.DataManager;
 import org.academiadecodigo.whoiswho.client.Navigation;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,9 +49,23 @@ public class LoginController implements Initializable{
         manager.setAddress(serverField.getText());
         manager.setPort(portField.getText());
 
-        Navigation.getInstance().loadScreen("gameView");
+
+        try {
+            Client client = new Client(Integer.parseInt(manager.getPort()),manager.getAddress());
+            manager.setClient(client);
+            client.setManager(manager);
+            client.sendToServer(manager.getUsername());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        Navigation.getInstance().loadScreen("startingView");
         Navigation.getInstance().setController(new GameScreenController());
-        ((GameScreenController)Navigation.getInstance().getController("gameView")).setManager(manager);
+        ((GameScreenController)Navigation.getInstance().getController("startingView")).setManager(manager);
+
+
+
     }
 
     public void setManager(DataManager manager) {

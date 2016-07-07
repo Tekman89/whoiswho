@@ -1,7 +1,6 @@
 package org.academiadecodigo.whoiswho.client;
 
 import javafx.scene.image.Image;
-import org.academiadecodigo.whoiswho.utilities.CharactersEnum;
 
 /**
  * Created by dmaia on 07-07-2016.

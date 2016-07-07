@@ -17,6 +17,7 @@ public class Client implements Runnable {
     private Socket socket;
     private PrintWriter toServer;
     private BufferedReader fromServer;
+    private DataManager manager;
     //controller;
 
 
@@ -46,5 +47,7 @@ public class Client implements Runnable {
         }
     }
 
-
+    public void setManager(DataManager manager) {
+        this.manager = manager;
+    }
 }

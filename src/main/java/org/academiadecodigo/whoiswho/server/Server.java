@@ -77,6 +77,8 @@ public class Server {
         public void run() {
 
             try {
+                Thread.currentThread().setName(in.readLine());
+
 
                 while (!clientSocket.isClosed()) {
                     String line = "";

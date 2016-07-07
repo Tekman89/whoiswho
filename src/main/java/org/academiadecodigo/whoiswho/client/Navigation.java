@@ -44,7 +44,7 @@ public final class Navigation {
         return instance;
     }
 
-    public void back(){
+    public void backToLogin(){
         if (scenes.isEmpty()) {
             return;
         }
@@ -53,7 +53,7 @@ public final class Navigation {
         scenes.pop();
 
         // load the scene at the top of the stack
-        setScene(scenes.peek());
+        setScene(scenes.get(0));
     }
 
     private void setScene(Scene scene) {
