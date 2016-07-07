@@ -16,6 +16,11 @@ public class DataManager {
     private Character[] characters;
 
     private GameScreenController observer;
+    private Client client;
+
+    public DataManager() {
+
+    }
 
     public String getUsername() {
         return username;
@@ -71,5 +76,9 @@ public class DataManager {
 
     public void setObserver(GameScreenController observer) {
         this.observer = observer;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }
