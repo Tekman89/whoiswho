@@ -29,8 +29,6 @@ public class ClientManager implements Runnable {
 
             synchronized (this){
                 while (true){
-
-
                     while (queuedClients.size() <= 0){
                         System.out.println("Waiting empty queue");
                         wait();
@@ -47,7 +45,7 @@ public class ClientManager implements Runnable {
                         Server.MySpecialPThread temp = queuedClients.removeFirst();
                         temp.send("Connected");
                         addToActive(temp);
-                        new Thread(temp).run();
+                        new Thread(temp).start();
                     }
 
 
@@ -87,8 +85,8 @@ public class ClientManager implements Runnable {
         synchronized (activeClients){
             System.out.println("Manager: Added to active");
             activeClients.add(myThread);
-            new Thread(myThread).run();
-            notify();
+            new Thread(myThread).start();
+            activeClients.notify();
         }
 
     }

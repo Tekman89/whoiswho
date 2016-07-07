@@ -25,6 +25,7 @@ public class Server {
     public Server(int portNumber, int maxNumber) throws IOException {
         serverSocket = new ServerSocket(portNumber);
         clientManager = new ClientManager(maxNumber, this);
+        new Thread(clientManager).start();
 
     }
 
