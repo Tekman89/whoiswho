@@ -97,7 +97,7 @@ public class ClientManager implements Runnable {
     public void removeGame(Game game) {
         synchronized (games) {
             games.remove(game);
-            games.notifyAll();  
+            games.notifyAll();
         }
     }
 }
