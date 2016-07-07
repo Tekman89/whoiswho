@@ -11,12 +11,10 @@ public class ClientManager implements Runnable {
     private LinkedList<Server.MySpecialPThread> activeClients;
     private LinkedList<Server.MySpecialPThread> queuedClients;
     private String waitingToConnect;
-    private Server myServer;
 
 
-    public ClientManager(int maxNumber, Server myServer) {
+    public ClientManager(int maxNumber) {
         this.MAX_NUMBER = maxNumber;
-        this.myServer = myServer;
         activeClients = new LinkedList<>();
         queuedClients = new LinkedList<>();
         waitingToConnect = Thread.currentThread().getName() + ": Waiting for Another Player";
@@ -29,8 +27,6 @@ public class ClientManager implements Runnable {
 
             synchronized (this){
                 while (true){
-
-
                     while (queuedClients.size() <= 0){
                         System.out.println("Waiting empty queue");
                         wait();
@@ -42,26 +38,20 @@ public class ClientManager implements Runnable {
                         }
                     }
 
-
                     if(!isFull()){
                         Server.MySpecialPThread temp = queuedClients.removeFirst();
                         temp.send("Connected");
                         addToActive(temp);
-                        new Thread(temp).run();
+                        new Thread(temp).start();
                     }
-
-
 
                 }
 
-
             }
-
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -87,8 +77,8 @@ public class ClientManager implements Runnable {
         synchronized (activeClients){
             System.out.println("Manager: Added to active");
             activeClients.add(myThread);
-            new Thread(myThread).run();
-            notify();
+            new Thread(myThread).start();
+            activeClients.notify();
         }
 
     }

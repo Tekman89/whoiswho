@@ -6,25 +6,22 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
- * Created by codecadet on 07/07/16.
- */
+ * TCP Server which supports multi-clients, has a ClientManager to manage all it's connections
+ **/
 public class Server {
-
-    /*
-        Multithread, reponsável pela comunicação entre game e cliente.
-     */
-
-    private final ServerSocket serverSocket;
-    private final ClientManager clientManager;
+    private ServerSocket serverSocket;
+    private ClientManager clientManager;
+    private Game game;
 
 
     public Server(int portNumber, int maxNumber) throws IOException {
         serverSocket = new ServerSocket(portNumber);
-        clientManager = new ClientManager(maxNumber, this);
+        clientManager = new ClientManager(maxNumber);
+        new Thread(clientManager).start();
+        game = new Game();
+//        new Thread(game).start();
 
     }
 
@@ -49,9 +46,7 @@ public class Server {
                 e.printStackTrace();
             }
 
-
         }
-
 
     }
 
@@ -100,7 +95,7 @@ public class Server {
                     if((line = in.readLine()) != null){
                         sendAll(Thread.currentThread().getName() + ": " + line);
 
-
+                        // TODO: 07/07/16 calls to game
                         // TODO: 07/07/16 exit condition (game)
                     }
 
@@ -119,6 +114,6 @@ public class Server {
         }
 
 
-    }// End of The Nested Class
+    }// End of The Inner Class
 
 }
