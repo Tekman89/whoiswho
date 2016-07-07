@@ -47,8 +47,9 @@ public class LoginController implements Initializable{
         manager.setAddress(serverField.getText());
         manager.setPort(portField.getText());
 
-        Navigation.getInstance().loadScreen("start");
-        Navigation.getInstance().setController(new StartingScreenController());
+        Navigation.getInstance().loadScreen("gameView");
+        Navigation.getInstance().setController(new GameScreenController());
+        ((GameScreenController)Navigation.getInstance().getController("gameView")).setManager(manager);
     }
 
     public void setManager(DataManager manager) {

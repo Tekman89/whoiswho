@@ -1,7 +1,7 @@
 package org.academiadecodigo.whoiswho.client;
 
 import javafx.scene.image.Image;
-import org.academiadecodigo.whoiswho.utilities.PlayersEnum;
+import org.academiadecodigo.whoiswho.utilities.CharactersEnum;
 
 /**
  * Created by dmaia on 07-07-2016.
@@ -23,22 +23,28 @@ public final class CharacterLoader {
         return instance;
     }
 
-    public Character loadCharacter(PlayersEnum player) {
+    public Character loadCharacter(String name) {
 
         Character character = null;
 
-        switch (player) {
-            case JOANA:
+        switch (name) {
+            case "JOANA":
+                character = new Character()
+                        .setName("Joana")
+                        .setHint("Sempre Contente!")
+                        .setFace(new Image("/images/lelito.jpg"))
+                        .setWrongFace(new Image("/images/wrongface.jpg"))
+                        .createCharacter();
                 break;
-            case JORGE:
+            case "JORGE":
                 break;
-            case ANA:
+            case "ANA":
                 break;
-            case DANIEL:
+            case "DANIEL":
                 break;
-            case RALFE:
+            case "RALFE":
                 break;
-            case ELIAS:
+            case "ELIAS":
                 break;
         }
 
