@@ -8,13 +8,15 @@ import java.util.HashMap;
 /**
  * The logic of the game
  */
-public class Game implements Runnable{
+public class Game implements Runnable {
     /*
      * Responsável pelas regras, inicialmente vai escolher random o target
      * Comunicação com o server
      * Personagens de cada player
      */
 
+    private String available_chars = "";
+    private final int MAX_CHARACTERS = 20;
     private Server server;
     private boolean gameOver;
     private String character;
@@ -24,6 +26,20 @@ public class Game implements Runnable{
 
     public Game(Server server) {
         this.server = server;
+        generateCharacters();
+    }
+
+    private void generateCharacters() {
+        String temp;
+        for (int i = 0; i < MAX_CHARACTERS; i++) {
+            temp = Characters.randomCharacter().toString();
+            System.out.println(temp);
+            if (!available_chars.contains(temp)) {
+                available_chars += temp + " ";
+            } else {
+                i--;
+            }
+        }
     }
 
     /**
@@ -34,12 +50,13 @@ public class Game implements Runnable{
     }
 
     @Override
-    public void run(){
+    public void run() {
 
     }
 
     /**
      * Checks if player's answer is right
+     *
      * @param answer the player's answer
      */
 
@@ -53,7 +70,7 @@ public class Game implements Runnable{
             if (takeLife()) {
                 server.sendToAll("The player X didn't guess right", this);
             } else {
-               server.sendToAll("The player X loose", this);
+                server.sendToAll("The player X loose", this);
                 gameOver = true;
             }
         }
@@ -61,6 +78,7 @@ public class Game implements Runnable{
 
     /**
      * Decreases the number of lifes
+     *
      * @return true if lifes is bigger than zero or false if not
      */
     public boolean takeLife() {
