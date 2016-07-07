@@ -10,7 +10,7 @@ public class ClientManager implements Runnable {
 
     private final int MAX_GAMES;
     private final int MAX_PLAYER_GAME = 2;
-    private HashMap<Game,LinkedList<Server.MySpecialPThread>> games;
+    private HashMap<Game, LinkedList<Server.MySpecialPThread>> games;
     private LinkedList<Server.MySpecialPThread> queuedClients;
     private String waitingToConnect;
     private Server server;
@@ -27,21 +27,21 @@ public class ClientManager implements Runnable {
     @Override
     public void run() {
 
-        try{
-            synchronized (queuedClients){
-                while (true){
-                    while (queuedClients.size() < MAX_PLAYER_GAME){
+        try {
+            synchronized (queuedClients) {
+                while (true) {
+                    while (queuedClients.size() < MAX_PLAYER_GAME) {
                         System.out.println("Waiting empty queue");
                         queuedClients.wait();
 
 
-                        while (games.size() >= MAX_GAMES){
+                        while (games.size() >= MAX_GAMES) {
                             System.out.println("Waiting is full");
-                         queuedClients.wait();
+                            queuedClients.wait();
                         }
                     }
 
-                    if(games.size() < MAX_GAMES && queuedClients.size() >= MAX_PLAYER_GAME){
+                    if (games.size() < MAX_GAMES && queuedClients.size() >= MAX_PLAYER_GAME) {
                         System.out.println("Start Game");
                         startGame();
                     }
@@ -57,14 +57,11 @@ public class ClientManager implements Runnable {
     }
 
 
-    private void startGame(){
+    private void startGame() {
         synchronized (queuedClients) {
             Game game = new Game(server);
-            System.out.println(game);
-            Server.MySpecialPThread p1 = queuedClients.getFirst();
-            queuedClients.remove(p1);
-            Server.MySpecialPThread p2 = queuedClients.getFirst();
-            queuedClients.remove(p2);
+            Server.MySpecialPThread p1 = queuedClients.removeFirst();
+            Server.MySpecialPThread p2 = queuedClients.removeFirst();
             LinkedList<Server.MySpecialPThread> provisoGame = new LinkedList<>();
             provisoGame.add(p1);
             provisoGame.add(p2);
@@ -80,12 +77,11 @@ public class ClientManager implements Runnable {
     }
 
     public void addToQueue(Server.MySpecialPThread myThread) {
-
         synchronized (queuedClients) {
             System.out.println("Manager: Added to Queue");
             myThread.send(waitingToConnect);
             queuedClients.add(myThread);
-           queuedClients.notify();
+            queuedClients.notify();
         }
     }
 
