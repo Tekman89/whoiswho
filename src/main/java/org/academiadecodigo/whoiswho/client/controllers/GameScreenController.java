@@ -101,6 +101,7 @@ public class GameScreenController implements Initializable{
     @FXML
     void onAnswer(ActionEvent event) {
         manager.setAnswer(answerField.getText());
+        update(manager.getAnswer()); // TODO: wrong answer
     }
 
     @FXML
@@ -115,7 +116,7 @@ public class GameScreenController implements Initializable{
 
         for (int i = 0; i < imageViews.length; i++) {
 
-            if(!manager.getCharacters()[i].isFaceDown()){
+            if (!manager.getCharacters()[i].isFaceDown()) {
                 if (source.getId().equals(imageViews[i].getId())) {
                     imageViews[i].setImage(manager.getCharacters()[i].getWrongFace());
                     manager.getCharacters()[i].setFaceDown(true);
@@ -139,7 +140,8 @@ public class GameScreenController implements Initializable{
         assert answerField != null : "fx:id=\"answerField\" was not injected: check your FXML file 'gameView.fxml'.";
         assert hintLabel != null : "fx:id=\"hintLabel\" was not injected: check your FXML file 'gameView.fxml'.";
         setImageDisplay();
-        //populateImages();
+        populateImages();
+        playerCharacter.setImage(manager.getSelected().getFace());
     }
 
     public void setImageDisplay() {
@@ -177,5 +179,21 @@ public class GameScreenController implements Initializable{
         for (int i = 0; i < imageViews.length; i++) {
             imageViews[i].setImage(manager.getCharacters()[i].getFace());
         }
+    }
+
+    public void update(String answer){
+
+        for(int i = 0; i < imageViews.length; i++){
+
+            if (manager.getSelected().getName().equals(answer)) {
+                //player wins
+            }
+
+            if(manager.getCharacters()[i].getName().equals(answer)){
+                imageViews[i].setImage(manager.getCharacters()[i].getWrongFace());
+            }
+
+        }
+
     }
 }

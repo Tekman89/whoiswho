@@ -29,6 +29,7 @@ public class MainGUI extends Application {
 
         DataManager manager = new DataManager();
         ((LoginController) Navigation.getInstance().getController("loginView")).setManager(manager);
+
     }
 
 }
