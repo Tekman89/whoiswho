@@ -1,6 +1,5 @@
 package org.academiadecodigo.whoiswho.client.controllers;
 
-import com.oracle.javafx.jmx.json.JSONReader;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventType;

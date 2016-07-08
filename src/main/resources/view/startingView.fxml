@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -24,102 +23,102 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ImageView fx:id="image00" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+      <ImageView fx:id="image00" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
      <!--    <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image01" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <ImageView fx:id="image01" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <!--<image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image02" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <ImageView fx:id="image02" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
        <!--  <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image03" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+      <ImageView fx:id="image03" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
      <!--    <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image04" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+      <ImageView fx:id="image04" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1">
        <!--  <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image10" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+      <ImageView fx:id="image10" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
         <!-- <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image11" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <ImageView fx:id="image11" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
        <!--  <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image12" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <ImageView fx:id="image12" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <!--<image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image13" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+      <ImageView fx:id="image13" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
       <!--   <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image14" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+      <ImageView fx:id="image14" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2">
         <!-- <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image20" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+      <ImageView fx:id="image20" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="3">
          <!--<image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image21" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <ImageView fx:id="image21" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
         <!-- <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image22" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <ImageView fx:id="image22" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
        <!--  <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image23" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+      <ImageView fx:id="image23" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3">
          <!--<image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image24" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+      <ImageView fx:id="image24" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3">
         <!-- <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image30" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+      <ImageView fx:id="image30" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="4">
         <!-- <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image31" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <ImageView fx:id="image31" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
          <!--<image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image32" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <ImageView fx:id="image32" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
          <!--<image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image33" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+      <ImageView fx:id="image33" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4">
         <!-- <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
       </ImageView>
-      <ImageView fx:id="image34" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+      <ImageView fx:id="image34" fitHeight="81.0" fitWidth="86.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4">
         <!-- <image>
             <Image url="@../images/lelito.jpg" />
          </image>-->
