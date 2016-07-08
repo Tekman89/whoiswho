@@ -60,7 +60,7 @@ public class ClientManager implements Runnable {
 
     private void startGame() {
         synchronized (queuedClients) {
-            Game game = new Game(server);
+            Game game = new Game();
             Server.MySpecialPThread p1 = queuedClients.removeFirst();
             Server.MySpecialPThread p2 = queuedClients.removeFirst();
             LinkedList<Server.MySpecialPThread> provisoGame = new LinkedList<>();
@@ -69,7 +69,6 @@ public class ClientManager implements Runnable {
             games.put(game, provisoGame);
             p1.setGame(game);
             p2.setGame(game);
-            new Thread(game).start();
             new Thread(p1).start();
             new Thread(p2).start();
             queuedClients.notify();

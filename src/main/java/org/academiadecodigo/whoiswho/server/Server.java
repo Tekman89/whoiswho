@@ -63,6 +63,7 @@ public class Server {
         private final BufferedReader in;
         private final PrintWriter out;
         private Game game;
+        private int lives = 3;
 
 
         private MySpecialPThread(Socket clientSocket) throws IOException {
@@ -77,29 +78,29 @@ public class Server {
         public void run() {
 
             try {
-                System.out.println("Set UserName");
                 Thread.currentThread().setName(in.readLine());
                 send(game.getAvailable_chars());
-                System.out.println("name set");
 
                 game.setPlayerCharacter(in.readLine(), clientSocket.getInetAddress());
-                System.out.println("Passed through the second read line");
 
                 while (!clientSocket.isClosed()) {
                     String line = "";
-                    System.out.println("In the while");
 
                     if ((line = in.readLine()) != null && !clientSocket.isClosed()) {
 
                         sendToAll(Thread.currentThread().getName() + ": " + line, game);
-                        if(game.checkAnswer(line, clientSocket.getInetAddress())){
-                            sendToAll("The player" + Thread.currentThread().getName() + " won", game);
-                        } else if(!game.isGameOver()){
-                            send("Missed you have "); //todo send the lifes of the player
-                        }
-                        if (game.isGameOver()) {
+                        if (game.checkAnswer(line, clientSocket.getInetAddress())) {
+                            sendToAll("The player " + Thread.currentThread().getName() + " won", game);
                             clientManager.removeGame(game);
                             break;
+                        } else {
+                            lives--;
+                            if (lives > 0) {
+                                send("Missed you have " + lives + " left");
+                            } else {
+                                clientManager.removeGame(game);
+                                break;
+                            }
                         }
 
                     }
@@ -112,7 +113,7 @@ public class Server {
 
         }
 
-        public void closeSockets(){
+        public void closeSockets() {
             try {
                 clientSocket.close();
             } catch (IOException e) {
@@ -120,7 +121,7 @@ public class Server {
             }
         }
 
-        public void setGame(Game game){
+        public void setGame(Game game) {
             this.game = game;
         }
 
