@@ -77,8 +77,10 @@ public class Server {
         public void run() {
 
             try {
+                System.out.println("Set UserName");
                 Thread.currentThread().setName(in.readLine());
-
+                send(game.getAvailable_chars());
+                System.out.println("name set");
 
                 while (!clientSocket.isClosed()) {
                     String line = "";

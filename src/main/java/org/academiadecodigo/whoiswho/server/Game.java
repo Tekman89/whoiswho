@@ -33,7 +33,6 @@ public class Game implements Runnable {
         String temp;
         for (int i = 0; i < MAX_CHARACTERS; i++) {
             temp = Characters.randomCharacter().toString();
-            System.out.println(temp);
             if (!available_chars.contains(temp)) {
                 available_chars += temp + " ";
             } else {
@@ -88,5 +87,9 @@ public class Game implements Runnable {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public String getAvailable_chars() {
+        return available_chars;
     }
 }
