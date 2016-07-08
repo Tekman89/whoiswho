@@ -1,6 +1,9 @@
 package org.academiadecodigo.whoiswho.client;
 
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+
+import javax.sound.sampled.Clip;
 
 /**
  * Created by dmaia on 07-07-2016.
@@ -11,11 +14,13 @@ public class Character {
     private boolean faceDown;
     private Image face;
     private Image wrongFace;
+    private Media sound;
 
-    public Character(String name, Image face, Image wrongFace) {
+    public Character(String name, Image face, Image wrongFace, Media sound) {
         this.name = name;
         this.face = face;
         this.wrongFace = wrongFace;
+        this.sound = sound;
     }
 
     public Character() {
@@ -49,7 +54,7 @@ public class Character {
     }
 
     public Character createCharacter() {
-        return new Character(name, face, wrongFace);
+        return new Character(name, face, wrongFace, sound);
     }
 
     public boolean isFaceDown() {
@@ -58,5 +63,14 @@ public class Character {
 
     public void setFaceDown(boolean faceDown) {
         this.faceDown = faceDown;
+    }
+
+    public Character setSound(Media sound){
+        this.sound = sound;
+        return this;
+    }
+
+    public Media getSound() {
+        return sound;
     }
 }

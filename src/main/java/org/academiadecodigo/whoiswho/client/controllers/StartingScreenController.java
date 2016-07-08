@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import org.academiadecodigo.whoiswho.client.DataManager;
 import org.academiadecodigo.whoiswho.client.Navigation;
 
