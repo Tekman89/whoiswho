@@ -17,7 +17,14 @@
   -fx-font-weight: bolder;
 }
 
+.text-area .content{
+  -fx-background-color: #222222;
+}
 
+.text-area{
+  -fx-text-fill: #ffffff;
+  -fx-border-color: white;
+}
 
 .text-field{
   -fx-background-color: #222222;
