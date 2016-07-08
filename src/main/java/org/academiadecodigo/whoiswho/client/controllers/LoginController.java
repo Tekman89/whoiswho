@@ -62,7 +62,6 @@ public class LoginController implements Initializable{
 
         Navigation.getInstance().loadScreen("startingView");
         Navigation.getInstance().setController(new StartingScreenController());
-        System.out.println(Navigation.getInstance().getController("startingView"));
         ((StartingScreenController)Navigation.getInstance()
                 .getController("startingView"))
                 .setManager(manager);
@@ -72,7 +71,6 @@ public class LoginController implements Initializable{
     }
 
     public void setManager(DataManager manager) {
-        System.out.println("Set the manager");
         this.manager = manager;
     }
 }

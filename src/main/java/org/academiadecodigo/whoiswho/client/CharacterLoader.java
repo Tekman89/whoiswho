@@ -26,11 +26,10 @@ public final class CharacterLoader {
     public Character loadCharacter(String name) {
 
         Character character = null;
-
         character = new Character.CharacterBuilder()
                 .setName(name)
-                .setFace(new Image("/images/lelito.jpg"))
-                .setWrongFace(new Image("/images/wrongface.jpg"))
+                .setFace(new Image("/images/" + name.toLowerCase() + ".png"))
+                .setWrongFace(new Image("/images/wrongface.png"))
                 .createCharacter();
 
         return character;
