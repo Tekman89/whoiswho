@@ -88,8 +88,7 @@ public class StartingScreenController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setImageDisplay();
-        populateImages();
+
     }
 
 
@@ -98,6 +97,11 @@ public class StartingScreenController implements Initializable{
 
         Node source = (Node)event.getSource();
 
+        if(imageViews == null){
+            return;
+        }
+
+        System.out.println(imageViews);
 
         for (int i = 0; i < imageViews.length; i++) {
 
@@ -108,44 +112,61 @@ public class StartingScreenController implements Initializable{
                 Navigation.getInstance().setController(new GameScreenController());
                 ((GameScreenController)Navigation.getInstance().getController("gameView")).setManager(manager);
                 manager.setObserver((GameScreenController) Navigation.getInstance().getController("gameView"));
+                ((GameScreenController)Navigation.getInstance().getController("gameView")).start();
             }
 
         }
+        System.out.println("Image Clicked");
 
+    }
+
+    public void start(){
+        System.out.println("Initialize the start");
+        setImageDisplay();
+        populateImages();
     }
 
     public void setImageDisplay() {
 
-        imageViews = new ImageView[20];
+        imageViews = new ImageView[1];
 
         imageViews[0] = image00;
-        imageViews[1] = image01;
-        imageViews[2] = image02;
-        imageViews[3] = image03;
-        imageViews[4] = image04;
-        imageViews[5] = image10;
-        imageViews[6] = image11;
-        imageViews[7] = image12;
-        imageViews[8] = image13;
-        imageViews[9] = image14;
-        imageViews[10] = image20;
-        imageViews[11] = image21;
-        imageViews[12] = image22;
-        imageViews[13] = image23;
-        imageViews[14] = image24;
-        imageViews[15] = image30;
-        imageViews[16] = image31;
-        imageViews[17] = image32;
-        imageViews[18] = image33;
-        imageViews[19] = image34;
+//        imageViews[1] = image01;
+//        imageViews[2] = image02;
+//        imageViews[3] = image03;
+//        imageViews[4] = image04;
+//        imageViews[5] = image10;
+//        imageViews[6] = image11;
+//        imageViews[7] = image12;
+//        imageViews[8] = image13;
+//        imageViews[9] = image14;
+//        imageViews[10] = image20;
+//        imageViews[11] = image21;
+//        imageViews[12] = image22;
+//        imageViews[13] = image23;
+//        imageViews[14] = image24;
+//        imageViews[15] = image30;
+//        imageViews[16] = image31;
+//        imageViews[17] = image32;
+//        imageViews[18] = image33;
+//        imageViews[19] = image34;
 
     }
 
     public void populateImages() {
+        System.out.println(imageViews);
+        System.out.println("Manager" + manager);
+        System.out.println("Characters: " + manager.getCharacters()[0]);
         for (int i = 0; i < imageViews.length; i++) {
             imageViews[i].setImage(manager.getCharacters()[i].getFace());
         }
     }
 
+    public void setManager(DataManager manager) {
+        this.manager = manager;
+    }
 
+    public DataManager getManager() {
+        return manager;
+    }
 }

@@ -139,6 +139,10 @@ public class GameScreenController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         assert answerField != null : "fx:id=\"answerField\" was not injected: check your FXML file 'gameView.fxml'.";
         assert hintLabel != null : "fx:id=\"hintLabel\" was not injected: check your FXML file 'gameView.fxml'.";
+
+    }
+
+    public void start(){
         setImageDisplay();
         populateImages();
         playerCharacter.setImage(manager.getSelected().getFace());

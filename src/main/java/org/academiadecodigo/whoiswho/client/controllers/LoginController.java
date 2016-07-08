@@ -54,21 +54,25 @@ public class LoginController implements Initializable{
             Client client = new Client(Integer.parseInt(manager.getPort()),manager.getAddress());
             manager.setClient(client);
             client.setManager(manager);
+            new Thread(client).start();
             client.sendToServer(manager.getUsername());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
         Navigation.getInstance().loadScreen("startingView");
-        Navigation.getInstance().setController(new GameScreenController());
-        ((GameScreenController)Navigation.getInstance().getController("startingView")).setManager(manager);
+        Navigation.getInstance().setController(new StartingScreenController());
+        System.out.println(Navigation.getInstance().getController("startingView"));
+        ((StartingScreenController)Navigation.getInstance()
+                .getController("startingView"))
+                .setManager(manager);
 
 
 
     }
 
     public void setManager(DataManager manager) {
+        System.out.println("Set the manager");
         this.manager = manager;
     }
 }

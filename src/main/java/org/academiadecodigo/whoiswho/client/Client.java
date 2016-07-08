@@ -1,6 +1,9 @@
 package org.academiadecodigo.whoiswho.client;
 
+import org.academiadecodigo.whoiswho.client.controllers.StartingScreenController;
+
 import java.io.*;
+import java.lang.*;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -33,11 +36,33 @@ public class Client implements Runnable {
     }
 
 
+
+
     @Override
     public void run() {
         try {
+            String line = fromServer.readLine();
+            String[] lineToFeed = line.split(" ");
+            Character[] characters = new Character[lineToFeed.length];
+
+            for (int i = 0; i <characters.length ; i++) {
+                characters[i] = CharacterLoader.getInstance().loadCharacter(lineToFeed[i]);
+            }
+            System.out.println("Line from server: " +  line);
+            manager.setCharacters(characters);
+
+
+            while(Navigation.getInstance().getController("startingView") == null || ((StartingScreenController) Navigation.getInstance().getController("startingView")).getManager() == null){
+
+            }
+
+            System.out.println("Before: " + Navigation.getInstance().getController("startingView"));
+            ((StartingScreenController)Navigation.
+                    getInstance().
+                    getController("startingView")).start();
+
             while (true) {
-                String line = fromServer.readLine();
+                String line2 = fromServer.readLine();
                 //Todo send the line to the controller;
                 System.out.println(line);
 

@@ -1,5 +1,6 @@
 package org.academiadecodigo.whoiswho.server;
 
+import javax.print.attribute.standard.Severity;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -79,7 +80,6 @@ public class ClientManager implements Runnable {
     public void addToQueue(Server.MySpecialPThread myThread) {
         synchronized (queuedClients) {
             System.out.println("Manager: Added to Queue");
-            myThread.send(waitingToConnect);
             queuedClients.add(myThread);
             queuedClients.notify();
         }
@@ -92,6 +92,9 @@ public class ClientManager implements Runnable {
 
     public void removeGame(Game game) {
         synchronized (games) {
+            LinkedList<Server.MySpecialPThread> linkedList = games.get(game);
+            linkedList.removeFirst().closeSockets();
+            linkedList.removeFirst().closeSockets();
             games.remove(game);
             games.notifyAll();
         }

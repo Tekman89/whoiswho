@@ -85,14 +85,15 @@ public class Server {
                 while (!clientSocket.isClosed()) {
                     String line = "";
 
-                    if ((line = in.readLine()) != null) {
+                    if ((line = in.readLine()) != null && !clientSocket.isClosed()) {
                         sendToAll(Thread.currentThread().getName() + ": " + line, game);
                         game.checkAnswer(line);
 
                         // TODO: 07/07/16 calls to game
                         if (game.isGameOver()) {
-                            clientSocket.close();//// TODO: 07/07/16 close all active players
+                            //// TODO: 07/07/16 close all active players
                             clientManager.removeGame(game);
+                            break;
                         }
 
                     }
@@ -100,10 +101,18 @@ public class Server {
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Closed");
             }
 
 
+        }
+
+        public void closeSockets(){
+            try {
+                clientSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         public void setGame(Game game){
