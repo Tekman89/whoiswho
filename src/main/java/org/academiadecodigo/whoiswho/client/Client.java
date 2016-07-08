@@ -1,10 +1,10 @@
 package org.academiadecodigo.whoiswho.client;
 
+import org.academiadecodigo.whoiswho.client.controllers.GameScreenController;
 import org.academiadecodigo.whoiswho.client.controllers.StartingScreenController;
 
 import java.io.*;
 import java.lang.*;
-import java.net.InetAddress;
 import java.net.Socket;
 
 /**
@@ -63,6 +63,8 @@ public class Client implements Runnable {
 
             while (true) {
                 String line2 = fromServer.readLine();
+
+                ((GameScreenController)Navigation.getInstance().getController("gameView")).getChatArea().setText(line2);
                 //Todo send the line to the controller;
                 System.out.println(line);
 

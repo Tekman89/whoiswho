@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
  */
 public class GameOverScreenController implements Initializable {
 
+    private String itsOver;
+
     @FXML
     private ResourceBundle resources;
 
@@ -47,5 +49,13 @@ public class GameOverScreenController implements Initializable {
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
 
+    }
+
+    public void setItsOver(String itsOver) {
+        this.itsOver = itsOver;
+    }
+
+    public void start() {
+        gameOverLabel.setText(itsOver);
     }
 }

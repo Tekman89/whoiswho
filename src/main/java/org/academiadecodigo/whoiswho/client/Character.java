@@ -8,14 +8,12 @@ import javafx.scene.image.Image;
 public class Character {
 
     private String name;
-    private String hint;
     private boolean faceDown;
     private Image face;
     private Image wrongFace;
 
-    public Character(String name, String hint, Image face, Image wrongFace) {
+    public Character(String name, Image face, Image wrongFace) {
         this.name = name;
-        this.hint = hint;
         this.face = face;
         this.wrongFace = wrongFace;
     }
@@ -29,15 +27,6 @@ public class Character {
 
     public Character setName(String name) {
         this.name = name;
-        return this;
-    }
-
-    public String getHint() {
-        return hint;
-    }
-
-    public Character setHint(String hint) {
-        this.hint = hint;
         return this;
     }
 
@@ -60,7 +49,7 @@ public class Character {
     }
 
     public Character createCharacter() {
-        return new Character(name, hint, face, wrongFace);
+        return new Character(name, face, wrongFace);
     }
 
     public boolean isFaceDown() {
