@@ -53,7 +53,7 @@ public final class Navigation {
         scenes.pop();
 
         // load the scene at the top of the stack
-        setScene(scenes.get(0));
+        setScene(scenes.getLast());
     }
 
     private void setScene(Scene scene) {

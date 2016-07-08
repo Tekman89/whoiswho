@@ -93,7 +93,7 @@ public class Server {
                         } else {
                             System.out.println(line.replace("@", ""));
                             if (game.checkAnswer(line.replace("@", ""), clientSocket.getInetAddress())) {
-                                sendToAll("The player " + Thread.currentThread().getName() + " won", game);
+                                sendToAll("The player " + Thread.currentThread().getName() + " won &&&&&", game);
                                 clientManager.removeGame(game);
                                 break;
                             } else {
@@ -101,6 +101,7 @@ public class Server {
                                 if (lives > 0) {
                                     send("Missed you have " + lives + " left");
                                 } else {
+                                    sendToAll("The player " + Thread.currentThread().getName() + "lost &&&&&", game);
                                     clientManager.removeGame(game);
                                     break;
                                 }

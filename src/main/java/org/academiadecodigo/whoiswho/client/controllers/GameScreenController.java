@@ -1,9 +1,13 @@
 package org.academiadecodigo.whoiswho.client.controllers;
 
+import com.oracle.javafx.jmx.json.JSONReader;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -13,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import org.academiadecodigo.whoiswho.client.DataManager;
 import org.academiadecodigo.whoiswho.client.Navigation;
 
@@ -28,64 +33,8 @@ public class GameScreenController implements Initializable{
     private DataManager manager;
 
     @FXML
-    private ImageView image00;
+    private GridPane gridPane;
 
-    @FXML
-    private ImageView image01;
-
-    @FXML
-    private ImageView image02;
-
-    @FXML
-    private ImageView image03;
-
-    @FXML
-    private ImageView image04;
-
-    @FXML
-    private ImageView image10;
-
-    @FXML
-    private ImageView image11;
-
-    @FXML
-    private ImageView image12;
-
-    @FXML
-    private ImageView image13;
-
-    @FXML
-    private ImageView image14;
-
-    @FXML
-    private ImageView image20;
-
-    @FXML
-    private ImageView image21;
-
-    @FXML
-    private ImageView image22;
-
-    @FXML
-    private ImageView image23;
-
-    @FXML
-    private ImageView image24;
-
-    @FXML
-    private ImageView image30;
-
-    @FXML
-    private ImageView image31;
-
-    @FXML
-    private ImageView image32;
-
-    @FXML
-    private ImageView image33;
-
-    @FXML
-    private ImageView image34;
     @FXML
     private ResourceBundle resources;
 
@@ -108,24 +57,43 @@ public class GameScreenController implements Initializable{
     private TextField hintChat;
 
     @FXML
+    private Button retryButton;
+
+    @FXML
+    private Button exitButton;
+
+    @FXML
     void onAnswer(ActionEvent event) {
         manager.getClient().sendToServer("@" + answerField.getText().replaceAll("@", ""));
-//        manager.setAnswer(answerField.getText());
-//        update(manager.getAnswer()); // TODO: wrong answer
+
+    }
+
+    @FXML
+    void onRetry(ActionEvent event) {
+        closeWindow(event);
+        Navigation.getInstance().backToLogin();
+    }
+
+    @FXML
+    void onExit(ActionEvent event) {
+        closeWindow(event);
+        System.exit(0);
     }
 
 
     @FXML
     void onChatEnter(KeyEvent event) {
+
         if (event.getCode().equals(KeyCode.ENTER)) {
             manager.getClient().sendToServer(hintChat.getText());
+            hintChat.clear();
         }
     }
 
     @FXML
     void onImageClick(MouseEvent event) {
-
         Node source = (Node)event.getSource();
+        System.out.println("catched");
 
         for (int i = 0; i < imageViews.length; i++) {
 
@@ -153,10 +121,16 @@ public class GameScreenController implements Initializable{
         assert answerField != null : "fx:id=\"answerField\" was not injected: check your FXML file 'gameView.fxml'.";
         assert hintLabel != null : "fx:id=\"hintLabel\" was not injected: check your FXML file 'gameView.fxml'.";
 
+        retryButton.setDisable(true);
+        retryButton.setVisible(false);
+        exitButton.setDisable(true);
+        exitButton.setVisible(false);
+
     }
 
     public void start(){
         setImageDisplay();
+
         populateImages();
         playerCharacter.setImage(manager.getSelected().getFace());
     }
@@ -165,26 +139,17 @@ public class GameScreenController implements Initializable{
 
         imageViews = new ImageView[20];
 
-        imageViews[0] = image00;
-        imageViews[1] = image01;
-        imageViews[2] = image02;
-        imageViews[3] = image03;
-        imageViews[4] = image04;
-        imageViews[5] = image10;
-        imageViews[6] = image11;
-        imageViews[7] = image12;
-        imageViews[8] = image13;
-        imageViews[9] = image14;
-        imageViews[10] = image20;
-        imageViews[11] = image21;
-        imageViews[12] = image22;
-        imageViews[13] = image23;
-        imageViews[14] = image24;
-        imageViews[15] = image30;
-        imageViews[16] = image31;
-        imageViews[17] = image32;
-        imageViews[18] = image33;
-        imageViews[19] = image34;
+        int i = imageViews.length - 1;
+        for (Node node: gridPane.getChildren()) {
+
+            if (i < 0) {
+                return;
+            }
+            if (node instanceof  ImageView) {
+                imageViews[i] = (ImageView) node;
+                i--;
+            }
+        }
 
     }
 
@@ -194,7 +159,9 @@ public class GameScreenController implements Initializable{
 
     public void populateImages() {
         for (int i = 0; i < imageViews.length; i++) {
-            imageViews[i].setImage(manager.getCharacters()[i].getFace());
+            imageViews[i].
+                    setImage(
+                            manager.getCharacters()[i].getFace());
         }
     }
 
@@ -202,18 +169,36 @@ public class GameScreenController implements Initializable{
 
         String temp = "";
 
-        if (answer.equals(" ")) {
+        System.out.println(answer);
+        System.out.println(manager.getUsername());
+        if (answer.contains(manager.getUsername())) {
             temp = "You Won";
 
         } else {
             temp = "You Lost";
         }
 
-        Navigation.getInstance().loadScreen("gameOverView");
-        Navigation.getInstance().setController(new GameOverScreenController());
-        ((GameOverScreenController)Navigation.getInstance().getController("gameOverView")).setItsOver(temp);
-        ((GameOverScreenController)Navigation.getInstance().getController("gameOverView")).start();
-        System.out.println(Navigation.getInstance().getController("gameOverView"));
+        synchronized (manager.getClient()) {
+
+            /*Navigation.getInstance().loadScreen("gameOverView");
+            Navigation.getInstance().setController(new GameOverScreenController());
+            ((GameOverScreenController) Navigation.getInstance().getController("gameOverView")).setItsOver(temp);
+            ((GameOverScreenController) Navigation.getInstance().getController("gameOverView")).start();
+            System.out.println(Navigation.getInstance().getController("gameOverView"));*/
+
+            retryButton.setDisable(false);
+            retryButton.setVisible(true);
+            exitButton.setDisable(false);
+            exitButton.setVisible(true);
+
+        }
+
+    }
+
+    public void closeWindow(ActionEvent event){
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
 
     }
 

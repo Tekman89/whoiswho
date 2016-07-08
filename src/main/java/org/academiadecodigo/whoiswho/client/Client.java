@@ -21,6 +21,8 @@ public class Client implements Runnable {
     private PrintWriter toServer;
     private BufferedReader fromServer;
     private DataManager manager;
+    private boolean gameOver;
+    private String answer;
     //controller;
 
 
@@ -48,7 +50,6 @@ public class Client implements Runnable {
             for (int i = 0; i <characters.length ; i++) {
                 characters[i] = CharacterLoader.getInstance().loadCharacter(lineToFeed[i]);
             }
-            System.out.println("Line from server: " +  line);
             manager.setCharacters(characters);
 
 
@@ -56,7 +57,6 @@ public class Client implements Runnable {
 
             }
 
-            System.out.println("Before: " + Navigation.getInstance().getController("startingView"));
             ((StartingScreenController)Navigation.
                     getInstance().
                     getController("startingView")).start();
@@ -67,12 +67,15 @@ public class Client implements Runnable {
                 if(line2 == null){
                     break;
                 }
+                System.out.println(line2);
+                if(line2.contains("&&&&&")){
+                    line2 = line2.replaceAll("&", "");
+                    System.out.println("notify");
+                    manager.notifyPlayer(line2);
 
-
-                GameScreenController controller = (GameScreenController)Navigation.getInstance().getController("gameView");
-
-                controller.getChatArea().setText(controller.getChatArea().getText() + "\n" + line2);
-                //Todo send the line to the controller;
+                }
+                    GameScreenController controller = (GameScreenController) Navigation.getInstance().getController("gameView");
+                    controller.getChatArea().setText(line2 + "\n" + controller.getChatArea().getText());
 
             }
         } catch (IOException e) {
@@ -82,5 +85,13 @@ public class Client implements Runnable {
 
     public void setManager(DataManager manager) {
         this.manager = manager;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }
