@@ -29,7 +29,7 @@ public final class CharacterLoader {
 
         character = new Character()
                 .setName(name)
-                .setFace(new Image("/images/" + name + ".png"))
+                .setFace(new Image("/images/lelito.jpg"))
                 .setWrongFace(new Image("/images/wrongface.jpg"))
                 .createCharacter();
 

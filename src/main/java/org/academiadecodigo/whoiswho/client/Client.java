@@ -61,12 +61,11 @@ public class Client implements Runnable {
                     getInstance().
                     getController("startingView")).start();
 
-            while (true) {
+            while (!socket.isClosed()) {
                 String line2 = fromServer.readLine();
 
                 ((GameScreenController)Navigation.getInstance().getController("gameView")).getChatArea().setText(line2);
                 //Todo send the line to the controller;
-                System.out.println(line);
 
             }
         } catch (IOException e) {

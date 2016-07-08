@@ -88,21 +88,24 @@ public class Server {
 
                     if ((line = in.readLine()) != null && !clientSocket.isClosed()) {
 
-                        sendToAll(Thread.currentThread().getName() + ": " + line, game);
-                        if (game.checkAnswer(line, clientSocket.getInetAddress())) {
-                            sendToAll("The player " + Thread.currentThread().getName() + " won", game);
-                            clientManager.removeGame(game);
-                            break;
+                        if (!line.contains("@")) {
+                            sendToAll(Thread.currentThread().getName() + ": " + line, game);
                         } else {
-                            lives--;
-                            if (lives > 0) {
-                                send("Missed you have " + lives + " left");
-                            } else {
+                            if (game.checkAnswer(line, clientSocket.getInetAddress())) {
+                                sendToAll("The player " + Thread.currentThread().getName() + " won", game);
                                 clientManager.removeGame(game);
                                 break;
+                            } else {
+                                lives--;
+                                if (lives > 0) {
+                                    send("Missed you have " + lives + " left");
+                                } else {
+                                    clientManager.removeGame(game);
+                                    break;
+                                }
                             }
-                        }
 
+                        }
                     }
 
                 }

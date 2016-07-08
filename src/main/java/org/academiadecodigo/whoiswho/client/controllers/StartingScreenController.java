@@ -107,7 +107,7 @@ public class StartingScreenController implements Initializable{
 
             if (source.getId().equals(imageViews[i].getId())) {
                 manager.setSelected(manager.getCharacters()[i]);
-
+                manager.getClient().sendToServer(manager.getSelected().getName());
                 Navigation.getInstance().loadScreen("gameView");
                 Navigation.getInstance().setController(new GameScreenController());
                 ((GameScreenController)Navigation.getInstance().getController("gameView")).setManager(manager);
