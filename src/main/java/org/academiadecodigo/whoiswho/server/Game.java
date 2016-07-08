@@ -61,7 +61,7 @@ public class Game {
     }
 
     private boolean validateAnswer(String answer, String target) {
-        return answer.equals(target);
+        return answer.equalsIgnoreCase(target);
 
     }
 
