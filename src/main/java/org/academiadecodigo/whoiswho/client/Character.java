@@ -25,38 +25,49 @@ public class Character {
         return name;
     }
 
-    public Character setName(String name) {
-        this.name = name;
-        return this;
+    public void setFaceDown(boolean faceDown) {
+            this.faceDown = faceDown;
     }
+
 
     public Image getFace() {
         return face;
     }
 
-    public Character setFace(Image face) {
-        this.face = face;
-        return this;
-    }
 
     public Image getWrongFace() {
         return wrongFace;
     }
 
-    public Character setWrongFace(Image wrongFace) {
-        this.wrongFace = wrongFace;
-        return this;
-    }
-
-    public Character createCharacter() {
-        return new Character(name, face, wrongFace);
-    }
 
     public boolean isFaceDown() {
         return faceDown;
     }
 
-    public void setFaceDown(boolean faceDown) {
-        this.faceDown = faceDown;
+    public static class CharacterBuilder {
+        private String name;
+        private Image face;
+        private Image wrongFace;
+
+        public CharacterBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public CharacterBuilder setFace(Image face) {
+            this.face = face;
+            return this;
+        }
+
+        public CharacterBuilder setWrongFace(Image wrongFace) {
+            this.wrongFace = wrongFace;
+            return this;
+        }
+
+        public Character createCharacter() {
+            return new Character(name, face, wrongFace);
+        }
+
     }
+
 }

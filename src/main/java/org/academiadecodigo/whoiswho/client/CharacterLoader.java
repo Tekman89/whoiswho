@@ -27,12 +27,11 @@ public final class CharacterLoader {
 
         Character character = null;
 
-        character = new Character()
+        character = new Character.CharacterBuilder()
                 .setName(name)
                 .setFace(new Image("/images/lelito.jpg"))
                 .setWrongFace(new Image("/images/wrongface.jpg"))
                 .createCharacter();
-
 
         return character;
     }

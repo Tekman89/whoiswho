@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import org.academiadecodigo.whoiswho.client.DataManager;
 import org.academiadecodigo.whoiswho.client.Navigation;
 
@@ -21,11 +22,14 @@ public class StartingScreenController implements Initializable{
     private DataManager manager;
 
     @FXML
+    private GridPane gridPane;
+
+    @FXML
     private ResourceBundle resources;
 
     @FXML
     private URL location;
-
+/*
     @FXML
     private ImageView image00;
 
@@ -84,7 +88,7 @@ public class StartingScreenController implements Initializable{
     private ImageView image33;
 
     @FXML
-    private ImageView image34;
+    private ImageView image34;*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -128,9 +132,21 @@ public class StartingScreenController implements Initializable{
 
     public void setImageDisplay() {
 
-        imageViews = new ImageView[1];
+        imageViews = new ImageView[20];
 
-        imageViews[0] = image00;
+        for (Node node: gridPane.getChildren()) {
+            int i = 0;
+
+            if (i > 19) {
+                return;
+            }
+            if (node instanceof  ImageView) {
+                imageViews[i] = (ImageView) node;
+                i++;
+            }
+        }
+
+        //imageViews[0] = image00;
 //        imageViews[1] = image01;
 //        imageViews[2] = image02;
 //        imageViews[3] = image03;
