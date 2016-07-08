@@ -88,10 +88,11 @@ public class Server {
 
                     if ((line = in.readLine()) != null && !clientSocket.isClosed()) {
 
-                        if (!line.contains("@")) {
+                        if (!line.contains("@")) { //todo Change to regex
                             sendToAll(Thread.currentThread().getName() + ": " + line, game);
                         } else {
-                            if (game.checkAnswer(line, clientSocket.getInetAddress())) {
+                            System.out.println(line.replace("@", ""));
+                            if (game.checkAnswer(line.replace("@", ""), clientSocket.getInetAddress())) {
                                 sendToAll("The player " + Thread.currentThread().getName() + " won", game);
                                 clientManager.removeGame(game);
                                 break;

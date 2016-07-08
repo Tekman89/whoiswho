@@ -53,6 +53,7 @@ public class Game {
             }
 
             if (validateAnswer(answer, players.get(key))) {
+                System.out.println(players.get(key));
                 return true;
             }
         }
