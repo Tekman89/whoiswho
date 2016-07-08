@@ -4,6 +4,7 @@ import org.academiadecodigo.whoiswho.utilities.Characters;
 
 import java.net.InetAddress;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * The logic of the game
@@ -21,13 +22,14 @@ public class Game implements Runnable {
     private boolean gameOver;
     private String character;
     private int lifes = 3;
-    private HashMap<InetAddress, String> players;
+    private HashMap<InetAddress, String> players = new HashMap<>();
 
 
     public Game(Server server) {
         this.server = server;
         generateCharacters();
     }
+
 
     private void generateCharacters() {
         String temp;
@@ -58,21 +60,33 @@ public class Game implements Runnable {
      *
      * @param answer the player's answer
      */
+    public boolean checkAnswer(String answer, InetAddress myAddress) {
 
+        Set<InetAddress> set = players.keySet();
 
-    public void checkAnswer(String answer) {
+        System.out.println(players.size());
 
-        if (answer.equals(character)) {
-            server.sendToAll("The players X won! ", this);
-            gameOver = true;
-        } else {
-            if (takeLife()) {
-                server.sendToAll("The player X didn't guess right", this);
-            } else {
-                server.sendToAll("The player X loose", this);
+        for (InetAddress key : set) {
+            if (myAddress.equals(key)) {
+                continue;
+            }
+
+            if (validateAnswer(answer, players.get(key))) {
+                return true;
+            }
+            if (!takeLife()) {
                 gameOver = true;
             }
+
         }
+        return false;
+    }
+
+    private boolean validateAnswer(String answer, String target) {
+        if (!answer.equals(target)) {
+            return false;
+        } else return true;
+
     }
 
     /**
@@ -91,5 +105,9 @@ public class Game implements Runnable {
 
     public String getAvailable_chars() {
         return available_chars;
+    }
+
+    public void setPlayerCharacter(String name, InetAddress address) {
+        players.put(address, name);
     }
 }

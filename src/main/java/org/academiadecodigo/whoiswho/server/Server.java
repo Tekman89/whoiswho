@@ -82,16 +82,22 @@ public class Server {
                 send(game.getAvailable_chars());
                 System.out.println("name set");
 
+                game.setPlayerCharacter(in.readLine(), clientSocket.getInetAddress());
+                System.out.println("Passed through the second read line");
+
                 while (!clientSocket.isClosed()) {
                     String line = "";
+                    System.out.println("In the while");
 
                     if ((line = in.readLine()) != null && !clientSocket.isClosed()) {
-                        sendToAll(Thread.currentThread().getName() + ": " + line, game);
-                        game.checkAnswer(line);
 
-                        // TODO: 07/07/16 calls to game
+                        sendToAll(Thread.currentThread().getName() + ": " + line, game);
+                        if(game.checkAnswer(line, clientSocket.getInetAddress())){
+                            sendToAll("The player" + Thread.currentThread().getName() + " won", game);
+                        } else if(!game.isGameOver()){
+                            send("Missed you have "); //todo send the lifes of the player
+                        }
                         if (game.isGameOver()) {
-                            //// TODO: 07/07/16 close all active players
                             clientManager.removeGame(game);
                             break;
                         }
@@ -103,7 +109,6 @@ public class Server {
             } catch (IOException e) {
                 System.out.println("Closed");
             }
-
 
         }
 
