@@ -110,6 +110,7 @@ public class StartingScreenController implements Initializable{
         for (int i = 0; i < imageViews.length; i++) {
 
             if (source.getId().equals(imageViews[i].getId())) {
+                System.out.println("Entered the if");
                 manager.setSelected(manager.getCharacters()[i]);
                 manager.getClient().sendToServer(manager.getSelected().getName());
                 Navigation.getInstance().loadScreen("gameView");
@@ -128,21 +129,24 @@ public class StartingScreenController implements Initializable{
         System.out.println("Initialize the start");
         setImageDisplay();
         populateImages();
+        for (int i = 0; i <imageViews.length ; i++) {
+            System.out.println(imageViews[i].getId());
+        }
     }
 
     public void setImageDisplay() {
 
-        imageViews = new ImageView[20];
+        imageViews = new ImageView[1];
 
         for (Node node: gridPane.getChildren()) {
-            int i = 0;
+            int i = imageViews.length-1;
 
-            if (i > 19) {
+            if (i < 0) {
                 return;
             }
             if (node instanceof  ImageView) {
                 imageViews[i] = (ImageView) node;
-                i++;
+                i--;
             }
         }
 

@@ -112,9 +112,7 @@ public class GameScreenController implements Initializable{
 
     @FXML
     void onAnswer(ActionEvent event) {
-        manager.setAnswer("@" + answerField.getText().replaceAll("@", ""));
-        update(manager.getAnswer());
-
+        manager.getClient().sendToServer("@" + answerField.getText().replaceAll("@", ""));
     }
 
 
@@ -173,17 +171,17 @@ public class GameScreenController implements Initializable{
 
     public void setImageDisplay() {
 
-        imageViews = new ImageView[20];
+        imageViews = new ImageView[1];
 
         for (Node node: gridPane.getChildren()) {
-            int i = 0;
+            int i = imageViews.length-1;
 
-            if (i > 19) {
+            if (i < 0) {
                 return;
             }
             if (node instanceof  ImageView) {
                 imageViews[i] = (ImageView) node;
-                i++;
+                i--;
             }
         }
 
