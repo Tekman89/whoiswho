@@ -70,8 +70,7 @@ public class Client implements Runnable {
 
 
                 GameScreenController controller = (GameScreenController)Navigation.getInstance().getController("gameView");
-
-                controller.getChatArea().setText(controller.getChatArea().getText() + "\n" + line2);
+                controller.getChatArea().setText(line2+ "\n" +controller.getChatArea().getText());
                 //Todo send the line to the controller;
 
             }

@@ -28,6 +28,9 @@ public class GameScreenController implements Initializable{
     private DataManager manager;
 
     @FXML
+    private GridPane gridPane;
+/*
+    @FXML
     private ImageView image00;
 
     @FXML
@@ -85,7 +88,7 @@ public class GameScreenController implements Initializable{
     private ImageView image33;
 
     @FXML
-    private ImageView image34;
+    private ImageView image34;*/
     @FXML
     private ResourceBundle resources;
 
@@ -109,16 +112,18 @@ public class GameScreenController implements Initializable{
 
     @FXML
     void onAnswer(ActionEvent event) {
-        manager.getClient().sendToServer("@" + answerField.getText().replaceAll("@", ""));
-//        manager.setAnswer(answerField.getText());
-//        update(manager.getAnswer()); // TODO: wrong answer
+        manager.setAnswer("@" + answerField.getText().replaceAll("@", ""));
+        update(manager.getAnswer());
+
     }
 
 
     @FXML
     void onChatEnter(KeyEvent event) {
+
         if (event.getCode().equals(KeyCode.ENTER)) {
             manager.getClient().sendToServer(hintChat.getText());
+            hintChat.clear();
         }
     }
 
@@ -157,6 +162,11 @@ public class GameScreenController implements Initializable{
 
     public void start(){
         setImageDisplay();
+
+        for (ImageView view: imageViews) {
+            System.out.println(view);
+        }
+
         populateImages();
         playerCharacter.setImage(manager.getSelected().getFace());
     }
@@ -165,7 +175,19 @@ public class GameScreenController implements Initializable{
 
         imageViews = new ImageView[20];
 
-        imageViews[0] = image00;
+        for (Node node: gridPane.getChildren()) {
+            int i = 0;
+
+            if (i > 19) {
+                return;
+            }
+            if (node instanceof  ImageView) {
+                imageViews[i] = (ImageView) node;
+                i++;
+            }
+        }
+
+      /*  imageViews[0] = image00;
         imageViews[1] = image01;
         imageViews[2] = image02;
         imageViews[3] = image03;
@@ -184,7 +206,7 @@ public class GameScreenController implements Initializable{
         imageViews[16] = image31;
         imageViews[17] = image32;
         imageViews[18] = image33;
-        imageViews[19] = image34;
+        imageViews[19] = image34;*/
 
     }
 
@@ -194,7 +216,9 @@ public class GameScreenController implements Initializable{
 
     public void populateImages() {
         for (int i = 0; i < imageViews.length; i++) {
-            imageViews[i].setImage(manager.getCharacters()[i].getFace());
+            imageViews[i].
+                    setImage(
+                            manager.getCharacters()[i].getFace());
         }
     }
 
