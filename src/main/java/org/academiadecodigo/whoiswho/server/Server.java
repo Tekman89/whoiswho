@@ -101,7 +101,7 @@ public class Server {
                                 if (lives > 0) {
                                     send("Missed you have " + lives + " left");
                                 } else {
-                                    sendToAll("The player " + Thread.currentThread().getName() + "lost &&&&&", game);
+                                    sendToAll("The player " + Thread.currentThread().getName() + " lost &&&&&", game);
                                     clientManager.removeGame(game);
                                     break;
                                 }

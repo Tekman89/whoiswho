@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.academiadecodigo.whoiswho.client.DataManager;
 import org.academiadecodigo.whoiswho.client.Navigation;
+import org.academiadecodigo.whoiswho.utilities.Sound;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +21,7 @@ public class StartingScreenController implements Initializable{
 
     private ImageView[] imageViews;
     private DataManager manager;
+    private String path = "src/main/resources/" ;
 
     @FXML
     private GridPane gridPane;
@@ -53,6 +55,7 @@ public class StartingScreenController implements Initializable{
             if (source.getId().equals(imageViews[i].getId())) {
                 manager.setSelected(manager.getCharacters()[i]);
                 manager.getClient().sendToServer(manager.getSelected().getName());
+                Sound.play(path + "sound/" + manager.getSelected().getName().toLowerCase() + ".wav");
                 Navigation.getInstance().loadScreen("gameView");
                 Navigation.getInstance().setController(new GameScreenController());
                 ((GameScreenController)Navigation.getInstance().getController("gameView")).setManager(manager);

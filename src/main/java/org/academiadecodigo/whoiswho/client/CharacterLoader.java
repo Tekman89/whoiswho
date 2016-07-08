@@ -29,7 +29,7 @@ public final class CharacterLoader {
         character = new Character.CharacterBuilder()
                 .setName(name)
                 .setFace(new Image("/images/" + name.toLowerCase() + ".png"))
-                .setWrongFace(new Image("/images/wrongface.jpg"))
+                .setWrongFace(new Image("/images/wrongface.png"))
                 .createCharacter();
 
         return character;

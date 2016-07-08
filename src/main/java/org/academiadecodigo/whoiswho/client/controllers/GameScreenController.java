@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.academiadecodigo.whoiswho.client.DataManager;
 import org.academiadecodigo.whoiswho.client.Navigation;
+import org.academiadecodigo.whoiswho.utilities.Sound;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -101,6 +102,7 @@ public class GameScreenController implements Initializable{
                 if (source.getId().equals(imageViews[i].getId())) {
                     imageViews[i].setImage(manager.getCharacters()[i].getWrongFace());
                     manager.getCharacters()[i].setFaceDown(true);
+                    Sound.play("src/main/resources/sound/coin.wav");
 
                 }
             } else {
