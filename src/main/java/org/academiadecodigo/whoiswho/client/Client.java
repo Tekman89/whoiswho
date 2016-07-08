@@ -64,6 +64,10 @@ public class Client implements Runnable {
             while (!socket.isClosed()) {
                 String line2 = fromServer.readLine();
 
+                if(line2 == null){
+                    break;
+                }
+
 
                 GameScreenController controller = (GameScreenController)Navigation.getInstance().getController("gameView");
 

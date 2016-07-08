@@ -109,8 +109,9 @@ public class GameScreenController implements Initializable{
 
     @FXML
     void onAnswer(ActionEvent event) {
-        manager.setAnswer(answerField.getText());
-        update(manager.getAnswer()); // TODO: wrong answer
+        manager.getClient().sendToServer("@" + answerField.getText().replaceAll("@", ""));
+//        manager.setAnswer(answerField.getText());
+//        update(manager.getAnswer()); // TODO: wrong answer
     }
 
 
