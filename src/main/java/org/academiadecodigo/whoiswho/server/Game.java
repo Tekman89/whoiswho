@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * The logic of the game
  */
-public class Game implements Runnable {
+public class Game {
     /*
      * Responsável pelas regras, inicialmente vai escolher random o target
      * Comunicação com o server
@@ -18,15 +18,10 @@ public class Game implements Runnable {
 
     private String available_chars = "";
     private final int MAX_CHARACTERS = 20;
-    private Server server;
-    private boolean gameOver;
-    private String character;
-    private int lifes = 3;
     private HashMap<InetAddress, String> players = new HashMap<>();
 
 
-    public Game(Server server) {
-        this.server = server;
+    public Game() {
         generateCharacters();
     }
 
@@ -41,18 +36,6 @@ public class Game implements Runnable {
                 i--;
             }
         }
-    }
-
-    /**
-     * Initializes de game
-     */
-    public void init() {
-        character = Characters.randomCharacter().toString();
-    }
-
-    @Override
-    public void run() {
-
     }
 
     /**
@@ -74,10 +57,6 @@ public class Game implements Runnable {
             if (validateAnswer(answer, players.get(key))) {
                 return true;
             }
-            if (!takeLife()) {
-                gameOver = true;
-            }
-
         }
         return false;
     }
@@ -89,19 +68,6 @@ public class Game implements Runnable {
 
     }
 
-    /**
-     * Decreases the number of lifes
-     *
-     * @return true if lifes is bigger than zero or false if not
-     */
-    public boolean takeLife() {
-        lifes--;
-        return lifes > 0;
-    }
-
-    public boolean isGameOver() {
-        return gameOver;
-    }
 
     public String getAvailable_chars() {
         return available_chars;
