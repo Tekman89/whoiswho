@@ -55,7 +55,7 @@ public class Client implements Runnable {
 
             while(Navigation.getInstance().getController("startingView") == null || ((StartingScreenController) Navigation.getInstance().getController("startingView")).getManager() == null){
 
-            }
+            } //FIX!!!!!
 
             ((StartingScreenController)Navigation.
                     getInstance().

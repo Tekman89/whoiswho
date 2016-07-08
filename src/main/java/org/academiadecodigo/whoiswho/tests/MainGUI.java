@@ -1,4 +1,4 @@
-package org.academiadecodigo.whoiswho;
+package org.academiadecodigo.whoiswho.tests;
 
 import javafx.application.Application;
 import javafx.fxml.Initializable;

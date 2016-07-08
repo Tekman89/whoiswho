@@ -1,4 +1,4 @@
-package org.academiadecodigo.whoiswho;
+package org.academiadecodigo.whoiswho.tests;
 
 import org.academiadecodigo.whoiswho.server.Server;
 import org.academiadecodigo.whoiswho.utilities.Characters;

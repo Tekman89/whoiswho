@@ -88,6 +88,8 @@ public class Server {
 
                     if ((line = in.readLine()) != null && !clientSocket.isClosed()) {
 
+                        line = line.replaceAll("&", "");
+
                         if (!line.contains("@")) { //todo Change to regex
                             sendToAll(Thread.currentThread().getName() + ": " + line, game);
                         } else {
