@@ -5,12 +5,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.academiadecodigo.whoiswho.client.DataManager;
+import org.academiadecodigo.whoiswho.client.Navigation;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +26,6 @@ public class GameScreenController implements Initializable{
 
     private ImageView[] imageViews;
     private DataManager manager;
-
 
     @FXML
     private ImageView image00;
@@ -99,14 +102,23 @@ public class GameScreenController implements Initializable{
     private ImageView playerCharacter;
 
     @FXML
+    private TextArea chatArea;
+
+    @FXML
+    private TextField hintChat;
+
+    @FXML
     void onAnswer(ActionEvent event) {
         manager.setAnswer(answerField.getText());
         update(manager.getAnswer()); // TODO: wrong answer
     }
 
-    @FXML
-    void onGetHint(ActionEvent event) {
 
+    @FXML
+    void onChatEnter(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            manager.getClient().sendToServer(hintChat.getText());
+        }
     }
 
     @FXML
@@ -173,7 +185,7 @@ public class GameScreenController implements Initializable{
         imageViews[18] = image33;
         imageViews[19] = image34;
 
-        }
+    }
 
     public void setManager(DataManager manager) {
         this.manager = manager;
@@ -187,17 +199,24 @@ public class GameScreenController implements Initializable{
 
     public void update(String answer){
 
-        for(int i = 0; i < imageViews.length; i++){
+        String temp = "";
 
-            if (manager.getSelected().getName().equals(answer)) {
-                //player wins
-            }
+        if (answer.equals(" ")) {
+            temp = "You Won";
 
-            if(manager.getCharacters()[i].getName().equals(answer)){
-                imageViews[i].setImage(manager.getCharacters()[i].getWrongFace());
-            }
-
+        } else {
+            temp = "You Lost";
         }
 
+        Navigation.getInstance().loadScreen("gameOverView");
+        Navigation.getInstance().setController(new GameOverScreenController());
+        ((GameOverScreenController)Navigation.getInstance().getController("gameOverView")).setItsOver(temp);
+        ((GameOverScreenController)Navigation.getInstance().getController("gameOverView")).start();
+        System.out.println(Navigation.getInstance().getController("gameOverView"));
+
+    }
+
+    public TextArea getChatArea() {
+        return chatArea;
     }
 }

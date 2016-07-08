@@ -27,46 +27,12 @@ public final class CharacterLoader {
 
         Character character = null;
 
-        String[] toFeed = name.split(" ");
+        character = new Character()
+                .setName(name)
+                .setFace(new Image("/images/" + name + ".png"))
+                .setWrongFace(new Image("/images/wrongface.jpg"))
+                .createCharacter();
 
-        for (int i = 0; i < toFeed.length ; i++) {
-            character = new Character()
-                    .setName(toFeed[i])
-                    .setHint("Sempre Contente!")
-//                    .setFace(new Image("/images/" + toFeed[i] + ".jpg"))
-                    .setFace(new Image("/images/lelito.jpg"))
-                    .setWrongFace(new Image("/images/wrongface.jpg"))
-                    .createCharacter();
-        }
-
-
-//        switch (name) {
-////            case "JOANA":
-////                character = new Character()
-////                        .setName("Joana")
-////                        .setHint("Sempre Contente!")
-////                        .setFace(new Image("/images/lelito.jpg"))
-////                        .setWrongFace(new Image("/images/wrongface.jpg"))
-////                        .createCharacter();
-////                break;
-////            case "JORGE":
-////                break;
-////            case "ANA":
-////                break;
-////            case "DANIEL":
-////                break;
-////            case "RALFE":
-////                break;
-////            case "ELIAS":
-////                break;
-//            default:
-//                character = new Character()
-//                        .setName("Joana")
-//                        .setHint("Sempre Contente!")
-//                        .setFace(new Image("/images/lelito.jpg"))
-//                        .setWrongFace(new Image("/images/wrongface.jpg"))
-//                        .createCharacter();
-//        }
 
         return character;
     }
